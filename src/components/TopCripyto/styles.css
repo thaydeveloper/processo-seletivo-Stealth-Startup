@@ -1,0 +1,35 @@
+/* Estilo global para cards */
+.card {
+  background-color: #160a0a;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  padding: 10px;
+}
+
+/* Estilo global para conteúdo do card */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Estilo para h2 */
+.h2 {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* Estilo para body1 */
+.body1 {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Estilo para body2 */
+.body2 {
+  font-size: 12px;
+  color: #777;
+}
