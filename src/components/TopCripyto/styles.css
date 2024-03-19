@@ -3,11 +3,19 @@
   background-color: #160a0a;
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-  margin: 10px;
-  padding: 10px;
+  width: 250px;
+  height: 350px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Estilo global para conteúdo do card */
+.card:hover {
+  transform: scale(1.1);
+
+}
+
+
+
 .card-content {
   display: flex;
   flex-direction: column;
@@ -30,6 +38,26 @@
 
 /* Estilo para body2 */
 .body2 {
-  font-size: 12px;
-  color: #777;
+  /* Estilo para body2 */
 }
+
+.card:hover .card-image {
+  animation: rotate360 0.3s linear;
+}
+
+
+/* Animação de rotação de 360 graus */
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Aplicar animação à imagem */
+/* .card-image {
+  animation: rotate360 2s linear infinite;
+} */

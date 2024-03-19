@@ -1,25 +1,3 @@
-/* export interface Coin {
-  id: string;
-  name: string;
-  symbol: string;
-  current_price: number;
-  image: string;
-}
-
-export interface WalletState {
-  connected: boolean;
-  address: string | null;
-  balance: number | null;
-}
-
-export interface AppState {
-  coins: Coin[];
-  wallet: WalletState;
-}
- */
-// src/types/types.ts
-// redux/types.ts
-
 export interface ICoin {
   id: string;
   symbol: string;
@@ -47,10 +25,12 @@ export interface IWalletData {
 
 export interface IAppContext {
   coinsData: ICoin[];
+  coinsGraficData: ICoin[];
   isLoading: boolean;
   walletData: IWalletData | null;
   walletConnected: boolean;
   fetchCoins: () => Promise<void>;
+  fetchGraficCoins: () => Promise<void>;
   connectToMetaMask: () => Promise<IWalletData>;
   updateWalletData: () => Promise<void>;
 }

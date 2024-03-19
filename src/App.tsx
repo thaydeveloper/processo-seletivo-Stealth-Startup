@@ -16,9 +16,12 @@ import {
   FormLabel,
 } from "@mui/material";
 
-import WalletInfo from "./components/WalletInfo";
 import { useAppContext } from "./context/context";
 import TopCryptocurrencies from "./components/TopCripyto/TopCryptocurrencies";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Details from "./components/DetailCripyto/Detail";
+import Layout from "./layout/Layout";
+import CoinDetails from "./components/DetailCripyto/Detail";
 function App() {
   const { updateWalletData, connectToMetaMask, fetchCoins } = useAppContext();
 
@@ -36,29 +39,26 @@ function App() {
   }, []);
 
   return (
-    <>
-      {
-        /* !walletConnected && */ <button onClick={() => handleConnectWallet()}>
-          Conectar à MetaMask
-        </button>
-      }
-      <WalletInfo />
-      {/* <button onClick={connectToWallet}>Conectar à MetaMask</button>
-      {connected && walletData && (
-        <div>
-          <p>Carteira Conectada</p>
-          <p>Endereço: {walletData.address}</p>
-          <p>Saldo: {walletData.balance.eth} ETH</p>
-        </div>
-      )} */}
-      {/* <AppAppBar /> */}
-      <Typography>teste agora </Typography>
-      {/*  <TesteComponent
-        text="vamos la?"
-        onClick={connectToWallet}
-      ></TesteComponent> */}
-      <TopCryptocurrencies />
-    </>
+    <BrowserRouter>
+      <Layout>
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "auto",
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<TopCryptocurrencies />} />
+            <Route path="/details/:id" element={<Details />} />
+            {/* <Route path="/coins/:id" element={<CoinDetails />} /> */}
+          </Routes>
+        </Box>
+      </Layout>
+    </BrowserRouter>
   );
 }
 

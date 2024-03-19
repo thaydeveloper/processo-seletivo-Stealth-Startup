@@ -4,16 +4,19 @@ import { IAppContext, ICoin, IWalletData } from "../types";
 
 const AppContext = createContext<IAppContext>({
   coinsData: [],
+  coinsGraficData: [],
   isLoading: false,
   walletData: null,
   walletConnected: false,
   fetchCoins: async () => {},
+  fetchGraficCoins: async () => {},
   connectToMetaMask: async () => ({ address: "", balance: { eth: 0 } }),
   updateWalletData: async () => {},
 });
 
 export const AppProvider: React.FC = ({ children }) => {
   const [coinsData, setCoinsData] = useState<ICoin[]>([]);
+  const [coinsGraficData, setCoinsGraficData] = useState<ICoin[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const [walletData, setWalletData] = useState<IWalletData | null>(null);
@@ -26,6 +29,17 @@ export const AppProvider: React.FC = ({ children }) => {
     try {
       const response = await api.getListCoinsCryptoCurrencies();
       setCoinsData(response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const fetchGraficCoins = async (coin: string): Promise<void> => {
+    setIsLoading(true);
+    try {
+      const response = await api.getListCoinsCryptoGraficos(coin);
+      setCoinsGraficData(response);
     } catch (error) {
       console.log(error);
     } finally {
@@ -52,6 +66,8 @@ export const AppProvider: React.FC = ({ children }) => {
         walletData,
         walletConnected,
         connectToMetaMask,
+        coinsGraficData,
+        fetchGraficCoins,
         updateWalletData,
       }}
     >
