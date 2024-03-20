@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Card, CardContent, Typography } from "@mui/material";
-import { useAppContext } from "../../context/context";
+
 import "./styles.css";
 
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setCoins } from "../../redux/Coins/ruducer";
+import { useApi } from "../../services/axios";
+import { DefaultRootState } from "react-redux";
 
 const TopCryptocurrencies = () => {
-  const { coinsData, isLoading } = useAppContext();
+  const { getListCoinsCryptoCurrencies } = useApi();
+  const coins = useSelector((state: DefaultRootState) => state.crypto.coins);
 
-  const top10Coins = coinsData?.slice(0, 10);
+  const dispatch = useDispatch();
+  const top10Coins = coins?.slice(0, 10);
 
+  useEffect(() => {
+    const fetchCoins = async () => {
+      const coins = await getListCoinsCryptoCurrencies();
+      dispatch(setCoins(coins));
+    };
+
+    fetchCoins();
+  }, [dispatch]);
   return (
     <Grid
       container
@@ -24,8 +39,7 @@ const TopCryptocurrencies = () => {
         paddingTop: "100px",
       }}
     >
-      {coinsData &&
-        !isLoading &&
+      {coins &&
         top10Coins.map((coin) => (
           <Card key={coin?.id} className="card">
             <Link to={`/details/${coin.id}`} style={{ all: "unset" }}>

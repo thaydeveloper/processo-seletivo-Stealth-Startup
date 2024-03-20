@@ -4,8 +4,7 @@ import Web3 from "web3";
 const api = axios.create({
   baseURL: "https://api.coingecko.com/api/v3/",
   headers: {
-    "x-cg-demo-api-key":
-      import.meta?.env?.API_KEY || "CG-woMJyKpRGFyMqhVzpxLW6X7T",
+    "x-cg-demo-api-key": import.meta?.env?.API_KEY,
   },
 });
 
@@ -31,9 +30,8 @@ export const useApi = () => ({
     }
   },
   getListCoinsCryptoGraficos: async (coin: string) => {
-    console.log(coin?.id);
     try {
-      const cacheKey = `listCoinsCryptoGraficos_${coin.id}`;
+      const cacheKey = `listCoinsCryptoGraficos_${coin?.id}`;
       if (cache[cacheKey]) {
         return cache[cacheKey];
       } else {

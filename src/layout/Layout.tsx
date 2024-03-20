@@ -1,4 +1,4 @@
-import Navbar from "../components/NavBar";
+import Navbar from "../components/Navbar/NavBar";
 import React, { ReactElement } from "react";
 
 const Layout = ({ children }: { children: ReactElement }) => {

@@ -1,21 +1,18 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { useAppContext } from "../../context/context";
+import React, { useEffect, useMemo } from "react";
+
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { DefaultRootState } from "react-redux";
 
 const CoinDetails: React.FC = () => {
-  const { coinsData, isLoading, fetchCoins } = useAppContext();
+  const coins = useSelector((state: DefaultRootState) => state.crypto.coins);
   const { id } = useParams();
 
-  const [coinData, setCoinData] = useState<any>(null);
-
-  // Lógica de busca e filtragem de dados
-  useEffect(() => {
-    fetchCoins();
-  }, []);
+  useEffect(() => {}, [coins]);
 
   const memoizedCoinData = useMemo(() => {
-    return coinsData?.find((coin) => coin.id === id);
-  }, [coinsData, id]);
+    return coins?.find((coin) => coin.id === id);
+  }, [coins, id]);
 
   if (!memoizedCoinData) return <div>Carregando...</div>;
 
@@ -57,18 +54,3 @@ const CoinDetails: React.FC = () => {
 };
 
 export default CoinDetails;
-
-{
-  /* <div>
-  <h1>{memoizedCoinData?.name}</h1>
-  <p>Variação de preço: {memoizedCoinData?.price_change_24h}</p>
-  <p>
-    Alta/baixa de 24h: {memoizedCoinData?.high_24h}/
-    {memoizedCoinData?.low_24h}
-  </p>
-  <p>Volume de mercado: {memoizedCoinData?.market_cap}</p>
-  {memoizedCoinData?.chart && (
-    <img src={memoizedCoinData?.chart} alt="Gráfico de preço" />
-  )}
-</div> */
-}
