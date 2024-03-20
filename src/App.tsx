@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-
 import "./App.css";
-import { connectToMetaMask, getWalletData, useApi } from "./services/axios";
+
 import * as React from "react";
 import {
   Button,
@@ -16,12 +14,11 @@ import {
   FormLabel,
 } from "@mui/material";
 
-import { useAppContext } from "./context/context";
 import TopCryptocurrencies from "./components/TopCripyto/TopCryptocurrencies";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Details from "./components/DetailCripyto/Detail";
 import Layout from "./layout/Layout";
-import CoinDetails from "./components/DetailCripyto/Detail";
+
 import ConnectWalletCard from "./components/WalletCard/WalletCard";
 function App() {
   return (
