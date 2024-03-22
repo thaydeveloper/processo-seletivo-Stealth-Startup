@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { DefaultRootState } from "react-redux";
+
 import {
   Box,
   Typography,
   CircularProgress,
-  Grid,
   Card,
   CardContent,
   CardMedia,
