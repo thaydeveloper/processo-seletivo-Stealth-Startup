@@ -1,15 +1,23 @@
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Container,
+  Box,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <AppBar position="fixed" sx={{ zIndex: 1200 }}>
+    <AppBar position="fixed" color="transparent">
       <Toolbar
         variant="regular"
         sx={(theme) => ({
+          padding: 0,
           display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+          /*   alignItems: "center",
+          justifyContent: "space-between", */
           flexShrink: 0,
           borderRadius: "999px",
           bgcolor:
@@ -26,18 +34,38 @@ function Navbar() {
               : "0 0 1px rgba(2, 31, 59, 0.7), 1px 1.5px 2px -1px rgba(2, 31, 59, 0.65), 4px 4px 12px -2.5px rgba(2, 31, 59, 0.65)",
         })}
       >
-        <Link to={"/"} style={{ all: "unset", cursor: "pointer" }}>
-          Home
-        </Link>
-        <Link to={"/metamask"} style={{ all: "unset", cursor: "pointer" }}>
-          Wallet Metamask
-        </Link>
+        <Container
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            color: "white",
+            fontFamily: "Montserrat",
+            width: "100vw",
+          }}
+        >
+          <Typography
+            className="title"
+            sx={{
+              fontWeight: "bold",
+              fontSize: 20,
+              textAlign: "left",
+              paddingRight: "10%",
+            }}
+          >
+            Crypto Coins
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "10px",
+              flexWrap: "nowrap",
+            }}
+          >
+            <Link to={"/"}>Home</Link> |<Link to={"/metamask"}>Metamask</Link>
+          </Box>
+        </Container>
       </Toolbar>
-      {/*  <Toolbar sx={{ gap: "30px" }}>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Minha Aplicação
-        </Typography>
-      </Toolbar> */}
     </AppBar>
   );
 }

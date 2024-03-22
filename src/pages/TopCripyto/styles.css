@@ -1,8 +1,8 @@
 /* Estilo global para cards */
 .card {
-  background-color: #160a0a;
+
   border-radius: 4px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
   width: 250px;
   height: 350px;
   cursor: pointer;
@@ -14,7 +14,16 @@
 
 }
 
+.card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 10px;
+}
 
+.card div {
+  gap: 30px;
+}
 
 .card-content {
   display: flex;
@@ -38,15 +47,13 @@
 
 /* Estilo para body2 */
 .body2 {
-  /* Estilo para body2 */
+  font-size: 18px;
 }
 
 .card:hover .card-image {
   animation: rotate360 0.3s linear;
 }
 
-
-/* Animação de rotação de 360 graus */
 @keyframes rotate360 {
   from {
     transform: rotate(0deg);
@@ -56,8 +63,3 @@
     transform: rotate(360deg);
   }
 }
-
-/* Aplicar animação à imagem */
-/* .card-image {
-  animation: rotate360 2s linear infinite;
-} */

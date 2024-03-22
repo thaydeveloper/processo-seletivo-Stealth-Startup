@@ -1,0 +1,62 @@
+.card-datail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  border: 1px solid #ccc;
+  margin-left: 20px;
+  height: 550px;
+
+
+  transition: transform 0.3s;
+
+}
+
+.card-datail:hover img {
+  animation: rotate360 0.3s linear;
+  scale: 1;
+}
+
+
+.card-datail>div {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-datail img {
+  width: 200px;
+  height: 200px;
+  padding-left: 20%;
+  padding-bottom: 15%;
+  object-fit: cover;
+
+}
+
+.color-value {
+  color: darkgrey;
+}
+
+/* .card .coin-info {
+  flex: 1;
+} */
+
+@media screen and (max-width: 716px) {
+  .card-datail {
+    padding: 10px;
+    margin-left: 0;
+
+    max-width: 300px;
+    max-height: 500px;
+
+  }
+
+  .card-datail img {
+    width: 150px;
+    height: 150px;
+
+    object-fit: cover;
+
+  }
+}

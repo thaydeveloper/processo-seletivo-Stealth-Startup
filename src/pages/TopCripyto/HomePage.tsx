@@ -6,25 +6,20 @@ import "./styles.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setCoins } from "../../redux/Coins/ruducer";
-import { useApi } from "../../services/axios";
-import { DefaultRootState } from "react-redux";
+import { fetchCoins } from "../../features/Coins/ruducer";
 
-const TopCryptocurrencies = () => {
-  const { getListCoinsCryptoCurrencies } = useApi();
-  const coins = useSelector((state: DefaultRootState) => state.crypto.coins);
+import numberFormat from "../../utils/formatValueCrypto";
 
+const HomePage = () => {
   const dispatch = useDispatch();
-  const top10Coins = coins?.slice(0, 10);
-
   useEffect(() => {
-    const fetchCoins = async () => {
-      const coins = await getListCoinsCryptoCurrencies();
-      dispatch(setCoins(coins));
-    };
+    dispatch(fetchCoins());
+  }, []);
 
-    fetchCoins();
-  }, [dispatch]);
+  const coinsData = useSelector((state) => state?.crypto.coinsData);
+  const loading = useSelector((state) => state?.crypto.loading);
+  const error = useSelector((state) => state?.crypto.error);
+
   return (
     <Grid
       container
@@ -33,16 +28,22 @@ const TopCryptocurrencies = () => {
         display: "flex",
         flexWrap: "wrap",
         width: "80%",
+        marginLeft: "10%",
         justifyContent: "center",
         alignItems: "center",
         gap: "50px",
         paddingTop: "100px",
       }}
     >
-      {coins &&
-        top10Coins.map((coin) => (
-          <Card key={coin?.id} className="card">
-            <Link to={`/details/${coin.id}`} style={{ all: "unset" }}>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
+      ) : (
+        /* top10Coins && */
+        coinsData?.map((coin) => (
+          <Link to={`/details/${coin.id}`} style={{ all: "unset" }}>
+            <Card key={coin?.id} className="card">
               <CardContent className="card-content">
                 <img
                   src={coin?.image}
@@ -52,18 +53,19 @@ const TopCryptocurrencies = () => {
                 <Typography variant="h5" component="h2" className="h2">
                   {coin?.name}
                 </Typography>
-                <Typography variant="body1" className="body1">
+                <Typography variant="h5" className="body1">
                   {coin?.symbol}
                 </Typography>
-                <Typography variant="body2" className="body2">
-                  Preço: ${coin?.current_price}
+                <Typography variant="h6" className="h2">
+                  Price: ${numberFormat(coin?.current_price.toFixed(2))}
                 </Typography>
               </CardContent>
-            </Link>
-          </Card>
-        ))}
+            </Card>
+          </Link>
+        ))
+      )}
     </Grid>
   );
 };
 
-export default TopCryptocurrencies;
+export default HomePage;
