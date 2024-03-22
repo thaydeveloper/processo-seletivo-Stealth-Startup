@@ -14,7 +14,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCoins());
-  }, []);
+  }, [dispatch]);
 
   const coinsData = useSelector((state) => state?.crypto.coinsData);
   const loading = useSelector((state) => state?.crypto.loading);
@@ -40,7 +40,6 @@ const HomePage = () => {
       ) : error ? (
         <p>Error: {error}</p>
       ) : (
-        /* top10Coins && */
         coinsData?.map((coin) => (
           <Link to={`/details/${coin.id}`} style={{ all: "unset" }}>
             <Card key={coin?.id} className="card">

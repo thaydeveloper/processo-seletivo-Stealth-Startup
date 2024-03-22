@@ -8,10 +8,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Details from "./pages/DetailCripyto/DetailPage";
 import Layout from "./layout/Layout";
 
-import ConnectWalletCard from "./components/WalletCard/WalletCard";
+import ConnectWalletCard from "./pages/WalletCard/WalletCard";
 function App() {
   return (
-    <div className="container">
+    <Box className="container">
       <BrowserRouter>
         <Layout>
           <Routes>
@@ -21,7 +21,7 @@ function App() {
           </Routes>
         </Layout>
       </BrowserRouter>
-    </div>
+    </Box>
   );
 }
 

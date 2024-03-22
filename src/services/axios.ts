@@ -19,7 +19,7 @@ export const useApi = () => ({
         return cache.listCoinsCryptoCurrencies;
       } else {
         const { data } = await api.get(
-          "coins/markets/?vs_currency=usd&order=market_cap_desc&per_page=12"
+          "coins/markets/?vs_currency=usd&order=market_cap_desc&per_page=10"
         );
 
         cache.listCoinsCryptoCurrencies = data;
@@ -29,16 +29,14 @@ export const useApi = () => ({
       console.log(error);
     }
   },
-  getListCoinsCryptoGraphic: async ({ id, days, currency }) => {
-    console.log(currency, days, id);
-
+  getListCoinsCryptoGraphic: async ({ id }) => {
     try {
-      const cacheKey = `listCoinsCryptoGraficos_${id}`;
+      const cacheKey = `listCoinsCryptoGraficos_${id?.id}`;
       if (cache[cacheKey]) {
         return cache[cacheKey];
       } else {
         const { data } = await api.get(
-          `coins/${id}/market_chart?vs_currency=${currency}&days=${days}
+          `coins/${id?.id}/market_chart?vs_currency=${id?.currency}&days=${id?.days}
           `
         );
 

@@ -24,7 +24,7 @@ export const fetchCoinsGraphic = createAsyncThunk(
   async (id, days, currency) => {
     try {
       const data = await api.getListCoinsCryptoGraphic({ id, days, currency });
-      console.log(data);
+
       return data;
     } catch (error) {
       throw new Error("Failed to fetch coins data");
