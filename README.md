@@ -48,6 +48,8 @@ Isso iniciará o servidor geralmente no endereço http://localhost:5173.
 
 Conectando com MetaMask
 
+Exemplo [https://docs.metamask.io/wallet/tutorials/react-dapp-local-state/]
+
 Verifique se a sua extensão MetaMask está desbloqueada no seu navegador.
 
 A aplicação deve possuir uma função (normalmente um botão "Conectar Carteira") para iniciar o processo de conexão.
