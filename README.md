@@ -1,30 +1,72 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Projeto de Criptomoedas
 
-Currently, two official plugins are available:
+Este projeto demonstra uma interface frontend para explorar informações sobre criptomoedas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Recursos:
 
-## Expanding the ESLint configuration
+* Listagem e detalhes de criptomoedas
+* Gráficos e dados em tempo real
+* Integração com a carteira MetaMask (necessária a extensão instalada no navegador)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Pré-requisitos
 
-- Configure the top-level `parserOptions` property like this:
+1. Node.js e npm (ou yarn) instalados na sua máquina. 
+2. Uma conta e a extensão MetaMask configurada em um navegador compatível (Chrome, Firefox, Edge, etc.). Consulte a documentação do MetaMask para obter ajuda na configuração inicial.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Instalando as Dependências
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clone este repositório:
+   ```bash
+   git clone [git@github.com:thaydeveloper/processo-seletivo-Stealth-Startup.git]
+   
+2. Entre no diretório do projeto:
+
+Bash
+cd teste-frontend
+
+3. Instale as dependências:
+
+Bash
+npm install 
+
+
+Executando o Projeto
+Inicie o servidor de desenvolvimento:
+
+Bash
+npm dev
+
+ou
+
+Bash
+yarn dev
+
+Isso iniciará o servidor geralmente no endereço http://localhost:5173.
+
+
+Conectando com MetaMask
+
+Exemplo [https://docs.metamask.io/wallet/tutorials/react-dapp-local-state/]
+
+Verifique se a sua extensão MetaMask está desbloqueada no seu navegador.
+
+A aplicação deve possuir uma função (normalmente um botão "Conectar Carteira") para iniciar o processo de conexão.
+
+Siga as instruções na interface web para autorizar a conexão.
+
+Documentação Adicional
+Para um estudo mais aprofundado sobre o código e integrações, consulte os arquivos e a documentação dentro do diretório src.
+
+Como Começar com a API CoinGecko:
+Crie uma Conta Gratuita:
+Acesse o site da CoinGecko [https://www.coingecko.com/]  e registre-se para uma conta gratuita. Isso te dará acesso à API com um limite de requisições por dia.
+
+Documentação da API CoinGecko: https://www.coingecko.com/api/documentation
+
+Obtenha sua Chave API:
+Após criar sua conta, você encontrará sua chave API no painel de controle. Essa chave é necessária para autenticar suas requisições à API.
+
+
+
