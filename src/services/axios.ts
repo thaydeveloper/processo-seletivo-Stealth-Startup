@@ -94,7 +94,6 @@ async function getWalletData() {
 
 export { connectToMetaMask, getWalletData };
 
-// Função auxiliar para retries (repete as chamadas à API)
 async function retryFetch(fetchFunction, retries = MAX_RETRIES) {
   try {
     return await fetchFunction();
@@ -106,9 +105,9 @@ async function retryFetch(fetchFunction, retries = MAX_RETRIES) {
         }`
       );
       await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
-      return retryFetch(fetchFunction, retries - 1); // Recursividade
+      return retryFetch(fetchFunction, retries - 1);
     } else {
-      throw error; // Atingido limite de tentativas, relança o erro
+      throw error;
     }
   }
 }
