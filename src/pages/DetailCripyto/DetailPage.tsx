@@ -24,6 +24,7 @@ const CoinDetails = () => {
   );
 
   const loading = useSelector((state) => state?.crypto.loading);
+  const error = useSelector((state) => state?.crypto.error);
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -34,7 +35,16 @@ const CoinDetails = () => {
     return coinsData?.find((coin) => coin.id === id);
   }, [coinsData, id]);
 
-  if (loading) return <CircularProgress />;
+  if (loading || error) {
+    return (
+      <Box>
+        <Typography variant="h4">
+          Loading...Limit teste exedido reconectando...
+        </Typography>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   let color =
     memoizedCoinData?.price_change_percentage_24h >= 0 ? "green" : "red";

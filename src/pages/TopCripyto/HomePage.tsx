@@ -1,5 +1,12 @@
-import React, { useEffect } from "react";
-import { Grid, Card, CardContent, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  CircularProgress,
+  Box,
+} from "@mui/material";
 
 import "./styles.css";
 
@@ -12,13 +19,31 @@ import numberFormat from "../../utils/formatValueCrypto";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const [reloadTimer, setReloadTimer] = useState(60);
   useEffect(() => {
     dispatch(fetchCoins());
+
+    const timer = setInterval(() => {
+      setReloadTimer((prevTimer) => prevTimer - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
   }, [dispatch]);
 
   const coinsData = useSelector((state) => state?.crypto.coinsData);
   const loading = useSelector((state) => state?.crypto.loading);
   const error = useSelector((state) => state?.crypto.error);
+
+  if (loading || error) {
+    return (
+      <Box>
+        <Typography variant="h4">
+          {`Loading... Limite de teste excedido. Reconectando em ${reloadTimer} segundos`}
+        </Typography>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Grid
@@ -41,7 +66,11 @@ const HomePage = () => {
         <p>Error: {error}</p>
       ) : (
         coinsData?.map((coin) => (
-          <Link to={`/details/${coin.id}`} style={{ all: "unset" }}>
+          <Link
+            key={coin?.id}
+            to={`/details/${coin.id}`}
+            style={{ all: "unset" }}
+          >
             <Card key={coin?.id} className="card">
               <CardContent className="card-content">
                 <img

@@ -11,40 +11,49 @@ const api = axios.create({
 const web3 = new Web3(window?.ethereum);
 
 const cache: { [key: string]: any } = {};
+const RETRY_DELAY = 30000;
+const MAX_RETRIES = 3;
 
 export const useApi = () => ({
   getListCoinsCryptoCurrencies: async () => {
+    const cacheKey = "listCoinsCryptoCurrencies";
+    if (cache[cacheKey]) {
+      return cache[cacheKey];
+    }
+
     try {
-      if (cache.listCoinsCryptoCurrencies) {
-        return cache.listCoinsCryptoCurrencies;
-      } else {
-        const { data } = await api.get(
+      const response = await retryFetch(async () => {
+        return await api.get(
           "coins/markets/?vs_currency=usd&order=market_cap_desc&per_page=10"
         );
-
-        cache.listCoinsCryptoCurrencies = data;
-        return data;
-      }
+      });
+      cache[cacheKey] = response.data;
+      return response.data;
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status === 429) {
+        throw new Error("Too many requests. Please try again later.");
+      } else {
+        throw error;
+      }
     }
   },
+
   getListCoinsCryptoGraphic: async ({ id }) => {
+    const cacheKey = `listCoinsCryptoGraficos_${id?.id}`;
+    if (cache[cacheKey]) {
+      return cache[cacheKey];
+    }
     try {
-      const cacheKey = `listCoinsCryptoGraficos_${id?.id}`;
-      if (cache[cacheKey]) {
-        return cache[cacheKey];
-      } else {
-        const { data } = await api.get(
+      const response = await retryFetch(async () => {
+        return await api.get(
           `coins/${id?.id}/market_chart?vs_currency=${id?.currency}&days=${id?.days}
           `
         );
-
-        cache[cacheKey] = data;
-        return data;
-      }
+      });
+      cache[cacheKey] = response.data;
+      return response.data;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   },
 });
@@ -84,3 +93,22 @@ async function getWalletData() {
 }
 
 export { connectToMetaMask, getWalletData };
+
+// Função auxiliar para retries (repete as chamadas à API)
+async function retryFetch(fetchFunction, retries = MAX_RETRIES) {
+  try {
+    return await fetchFunction();
+  } catch (error) {
+    if (retries > 0) {
+      console.warn(
+        `Request failed, retrying in ${RETRY_DELAY}ms. Retries left: ${
+          retries - 1
+        }`
+      );
+      await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+      return retryFetch(fetchFunction, retries - 1); // Recursividade
+    } else {
+      throw error; // Atingido limite de tentativas, relança o erro
+    }
+  }
+}
