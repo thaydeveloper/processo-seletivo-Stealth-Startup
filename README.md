@@ -19,7 +19,7 @@ Este projeto demonstra uma interface frontend para explorar informações sobre 
 
 1. Clone este repositório:
    ```bash
-   git clone [URL inválido removido]
+   git clone [git@github.com:thaydeveloper/processo-seletivo-Stealth-Startup.git]
    
 2. Entre no diretório do projeto:
 
@@ -56,6 +56,15 @@ Siga as instruções na interface web para autorizar a conexão.
 
 Documentação Adicional
 Para um estudo mais aprofundado sobre o código e integrações, consulte os arquivos e a documentação dentro do diretório src.
+
+Como Começar com a API CoinGecko:
+Crie uma Conta Gratuita:
+Acesse o site da CoinGecko [https://www.coingecko.com/]  e registre-se para uma conta gratuita. Isso te dará acesso à API com um limite de requisições por dia.
+
+Documentação da API CoinGecko: https://www.coingecko.com/api/documentation
+
+Obtenha sua Chave API:
+Após criar sua conta, você encontrará sua chave API no painel de controle. Essa chave é necessária para autenticar suas requisições à API.
 
 
 
